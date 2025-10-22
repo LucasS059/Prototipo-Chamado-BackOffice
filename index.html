@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Protótipo de Sistema de Chamados</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="main-container">
+        <header class="main-header">
+            <h1>Sistema de Chamados</h1>
+            <button id="openRegisterModalBtn" class="btn btn-primary">Registrar Novo Chamado</button>
+        </header>
+
+        <section class="filter-card">
+            <div class="card-header">
+                <h2>Filtros de Pesquisa</h2>
+            </div>
+            <form id="filterForm" class="filter-grid">
+                <div class="form-group">
+                    <label for="filterId">ID do Chamado</label>
+                    <input type="text" id="filterId" placeholder="Digite o ID">
+                </div>
+                <div class="form-group">
+                    <label for="filterTitle">Título do Chamado</label>
+                    <input type="text" id="filterTitle" placeholder="Digite o Título">
+                </div>
+                <div class="form-group">
+                    <label for="filterDate">Data de Abertura</label>
+                    <input type="date" id="filterDate">
+                </div>
+                <div class="form-group">
+                    <label for="filterStatus">Status</label>
+                    <select id="filterStatus">
+                        <option value="">Selecione...</option>
+                        <option value="Aberto">Aberto</option>
+                        <option value="Em Andamento">Em Andamento</option>
+                        <option value="Resolvido">Resolvido</option>
+                        <option value="Fechado">Fechado</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="filterCompany">Empresa</label>
+                    <input type="text" id="filterCompany" placeholder="Digite a Empresa">
+                </div>
+                <div class="form-group">
+                    <label for="filterUser">Usuário</label>
+                    <input type="text" id="filterUser" placeholder="Nome do Usuário">
+                </div>
+                 <div class="form-group"></div>
+                <div class="form-group-actions">
+                    <button type="submit" class="btn btn-primary">Buscar</button>
+                    <button type="reset" class="btn btn-secondary">Limpar</button>
+                </div>
+            </form>
+        </section>
+
+        <section class="table-container">
+            <h3>Lista de Chamados</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Título do Chamado</th>
+                        <th>Usuário</th>
+                        <th>Empresa</th>
+                        <th>Status</th>
+                        <th>Data de Abertura</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="chamadosTableBody">
+                </tbody>
+            </table>
+        </section>
+    </div>
+    
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Registrar Novo Chamado</h2>
+                <span class="close-btn" id="closeRegisterModal">&times;</span>
+            </div>
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="registerUser">Usuário</label>
+                    <input type="text" id="registerUser" readonly style="background-color: #f0f0f0;">
+                </div>
+                <div class="form-group">
+                    <label for="registerTitle">Nome da Issue *</label>
+                    <input type="text" id="registerTitle" placeholder="Um título curto e objetivo" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerDescription">Descrição *</label>
+                    <textarea id="registerDescription" rows="4" placeholder="Descreva o problema ou solicitação em detalhes" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="registerCompany">Empresa (Opcional)</label>
+                    <input type="text" id="registerCompany" placeholder="Nome da empresa, se aplicável">
+                </div>
+                 <div class="form-group">
+                    <label for="registerFiles">Anexar Arquivos</label>
+                    <input type="file" id="registerFiles" multiple>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="cancelRegisterBtn">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Registrar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <div id="detailsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="detailsModalTitle">Detalhes do Chamado</h2>
+                <span class="close-btn" id="closeDetailsModal">&times;</span>
+            </div>
+
+            <div class="campo-visualizacao">
+                <p><strong>Solicitante:</strong> <span id="viewUsuario"></span></p>
+                <p><strong>Empresa:</strong> <span id="viewEmpresa"></span></p>
+                <p><strong>Status:</strong> <span id="viewStatus"></span></p>
+                <p><strong>Data de Abertura:</strong> <span id="viewData"></span></p>
+                <hr>
+                <p><strong>Título:</strong> <span id="viewTitulo"></span></p>
+                <p><strong>Descrição Completa:</strong></p>
+                <p id="viewDescricao"></p>
+            </div>
+
+            <div class="campo-edicao">
+                <form id="formDetalhes">
+                    <div class="form-group">
+                        <label for="detalhesTitulo">Título do Chamado</label>
+                        <input type="text" id="detalhesTitulo" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="detalhesDescricao">Descrição</label>
+                        <textarea id="detalhesDescricao" rows="5" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="detalhesEmpresa">Empresa</label>
+                        <input type="text" id="detalhesEmpresa">
+                    </div>
+                    <div class="form-group">
+                        <label for="detalhesStatus">Status</label>
+                        <select id="detalhesStatus" required>
+                            <option value="Aberto">Aberto</option>
+                            <option value="Em Andamento">Em Andamento</option>
+                            <option value="Resolvido">Resolvido</option>
+                            <option value="Fechado">Fechado</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="modal-footer">
+                <div class="botoes-visualizacao">
+                    <button type="button" class="btn btn-secondary" id="closeDetailsBtn">Fechar</button>
+                    <button type="button" class="btn btn-primary" id="editBtn">Editar</button>
+                </div>
+                <div class="botoes-edicao">
+                    <button type="button" class="btn btn-secondary" id="cancelEditBtn">Cancelar</button>
+                    <button type="submit" form="formDetalhes" class="btn btn-primary">Salvar Alterações</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
