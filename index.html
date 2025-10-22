@@ -38,21 +38,17 @@
                     <label for="filterStatus">Status</label>
                     <select id="filterStatus">
                         <option value="">Selecione...</option>
-                        <option value="Aberto">Aberto</option>
-                        <option value="Em Andamento">Em Andamento</option>
-                        <option value="Resolvido">Resolvido</option>
-                        <option value="Fechado">Fechado</option>
+                        <option value="backlog">Aberto</option>
+                        <option value="in progress">Em Andamento</option>
+                        <option value="qa">Aguardando validação Cliente</option>
+                        <option value="done">Resolvido</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="filterCompany">Empresa</label>
                     <input type="text" id="filterCompany" placeholder="Digite a Empresa">
                 </div>
-                <div class="form-group">
-                    <label for="filterUser">Usuário</label>
-                    <input type="text" id="filterUser" placeholder="Nome do Usuário">
-                </div>
-                 <div class="form-group"></div>
+                <div class="form-group"></div>
                 <div class="form-group-actions">
                     <button type="submit" class="btn btn-primary">Buscar</button>
                     <button type="reset" class="btn btn-secondary">Limpar</button>
@@ -67,7 +63,6 @@
                     <tr>
                         <th>ID</th>
                         <th>Título do Chamado</th>
-                        <th>Usuário</th>
                         <th>Empresa</th>
                         <th>Status</th>
                         <th>Data de Abertura</th>
@@ -88,22 +83,19 @@
             </div>
             <form id="registerForm">
                 <div class="form-group">
-                    <label for="registerUser">Usuário</label>
-                    <input type="text" id="registerUser" readonly style="background-color: #f0f0f0;">
-                </div>
-                <div class="form-group">
                     <label for="registerTitle">Nome da Issue *</label>
                     <input type="text" id="registerTitle" placeholder="Um título curto e objetivo" required>
                 </div>
                 <div class="form-group">
                     <label for="registerDescription">Descrição *</label>
-                    <textarea id="registerDescription" rows="4" placeholder="Descreva o problema ou solicitação em detalhes" required></textarea>
+                    <textarea id="registerDescription" rows="4"
+                        placeholder="Descreva o problema ou solicitação em detalhes" required></textarea>
                 </div>
                 <div class="form-group">
                     <label for="registerCompany">Empresa (Opcional)</label>
                     <input type="text" id="registerCompany" placeholder="Nome da empresa, se aplicável">
                 </div>
-                 <div class="form-group">
+                <div class="form-group">
                     <label for="registerFiles">Anexar Arquivos</label>
                     <input type="file" id="registerFiles" multiple>
                 </div>
@@ -114,7 +106,7 @@
             </form>
         </div>
     </div>
-    
+
     <div id="detailsModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -123,7 +115,6 @@
             </div>
 
             <div class="campo-visualizacao">
-                <p><strong>Solicitante:</strong> <span id="viewUsuario"></span></p>
                 <p><strong>Empresa:</strong> <span id="viewEmpresa"></span></p>
                 <p><strong>Status:</strong> <span id="viewStatus"></span></p>
                 <p><strong>Data de Abertura:</strong> <span id="viewData"></span></p>
@@ -131,6 +122,9 @@
                 <p><strong>Título:</strong> <span id="viewTitulo"></span></p>
                 <p><strong>Descrição Completa:</strong></p>
                 <p id="viewDescricao"></p>
+                <hr>
+                <p><strong>Anexos:</strong></p>
+                <ul id="viewAnexos" class="anexos-list"></ul>
             </div>
 
             <div class="campo-edicao">
@@ -150,15 +144,15 @@
                     <div class="form-group">
                         <label for="detalhesStatus">Status</label>
                         <select id="detalhesStatus" required>
-                            <option value="Aberto">Aberto</option>
-                            <option value="Em Andamento">Em Andamento</option>
-                            <option value="Resolvido">Resolvido</option>
-                            <option value="Fechado">Fechado</option>
+                            <option value="backlog">Aberto</option>
+                            <option value="in progress">Em Andamento</option>
+                            <option value="qa">Aguardando validação Cliente</option>
+                            <option value="done">Resolvido</option>
                         </select>
                     </div>
                 </form>
             </div>
-            
+
             <div class="modal-footer">
                 <div class="botoes-visualizacao">
                     <button type="button" class="btn btn-secondary" id="closeDetailsBtn">Fechar</button>

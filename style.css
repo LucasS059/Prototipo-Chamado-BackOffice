@@ -29,7 +29,9 @@ body {
     margin-bottom: 20px;
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
     color: var(--text-color);
 }
 
@@ -39,7 +41,7 @@ h1, h2, h3 {
     border-radius: 8px;
     padding: 24px;
     margin-bottom: 30px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .card-header {
@@ -122,7 +124,7 @@ select {
     background-color: var(--card-bg-color);
     border-radius: 8px;
     padding: 24px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 table {
@@ -130,7 +132,8 @@ table {
     border-collapse: collapse;
 }
 
-th, td {
+th,
+td {
     padding: 12px 15px;
     text-align: left;
     border-bottom: 1px solid var(--border-color);
@@ -148,10 +151,23 @@ thead th {
     font-weight: 500;
     color: white;
 }
-.status-aberto { background-color: #3b82f6; }
-.status-em-andamento { background-color: #f59e0b; }
-.status-resolvido { background-color: #22c55e; }
-.status-fechado { background-color: #6b7280; }
+
+.status-backlog {
+    background-color: #3b82f6;
+}
+
+.status-in-progress {
+    background-color: #f59e0b;
+}
+
+.status-qa {
+    background-color: #6b7280;
+}
+
+.status-done {
+    background-color: #22c55e;
+}
+
 
 .action-btn {
     cursor: pointer;
@@ -163,7 +179,7 @@ thead th {
 }
 
 .modal {
-    display: none; 
+    display: none;
     position: fixed;
     z-index: 1000;
     left: 0;
@@ -171,7 +187,7 @@ thead th {
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgba(0,0,0,0.6);
+    background-color: rgba(0, 0, 0, 0.6);
 }
 
 .modal-content {
@@ -185,8 +201,15 @@ thead th {
 }
 
 @keyframes slide-down {
-    from { transform: translateY(-30px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
+    from {
+        transform: translateY(-30px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
 .modal-header {
@@ -238,15 +261,34 @@ thead th {
     border-top: 1px solid var(--border-color);
 }
 
-.campo-edicao, .botoes-edicao {
+.campo-edicao,
+.botoes-edicao {
     display: none;
 }
+
 .modo-edicao .botoes-edicao {
     display: flex;
 }
+
 .modo-edicao .campo-edicao {
     display: block;
 }
-.modo-edicao .campo-visualizacao, .modo-edicao .botoes-visualizacao {
+
+.modo-edicao .campo-visualizacao,
+.modo-edicao .botoes-visualizacao {
     display: none;
+}
+
+.anexos-list {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.anexos-list li {
+    background-color: #f4f4f7;
+    border: 1px solid #dcdcdc;
+    border-radius: 4px;
+    padding: 8px 12px;
+    margin-bottom: 5px;
+    font-size: 0.9rem;
 }
